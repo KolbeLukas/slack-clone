@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RemoveImgDialogComponent } from '../remove-img-dialog/remove-img-dialog.component';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -10,10 +11,11 @@ import { RemoveImgDialogComponent } from '../remove-img-dialog/remove-img-dialog
   styleUrls: ['./edit-user-dialog.component.scss']
 })
 export class EditUserDialogComponent implements OnInit {
-
+  selectedFile:any;
   foods: any;
   constructor(public dialog: MatDialog,
-    public dialogRef: MatDialogRef<EditUserDialogComponent>) { }
+    public dialogRef: MatDialogRef<EditUserDialogComponent>,
+    private http: HttpClient) { }
 
 
   ngOnInit(): void {
@@ -24,16 +26,17 @@ export class EditUserDialogComponent implements OnInit {
     this.dialogRef.close(EditUserDialogComponent);
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   uploadImage() {
-    const storage = getStorage();
-    const storageRef = ref(storage, 'some-child');
-
-    /* 'file' comes from the Blob or File API
-
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
-      
-    });*/
+   const fd = new FormData();
+   fd.append('image', this.selectedFile, this.selectedFile.name);
+   this.http.post('https://console.firebase.google.com/project/slack-clone-922d6/storage/slack-clone-922d6.appspot.com/files', this.selec)
+   .subscribe(res =>{
+    console.log(res);
+   })
   }
 
 

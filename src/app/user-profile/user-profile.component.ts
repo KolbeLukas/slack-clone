@@ -19,12 +19,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   date = new Date();
   user: User = new User();
   authUserData!: any;
-  activeColor ="grey";
+  activeColor = "grey";
 
   userSubscription!: Subscription;
   authStateSubscription!: Subscription;
 
-  constructor(public dialog: MatDialog,private firestore: AngularFirestore, private route: ActivatedRoute, 
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute,
     private authService: AuthService, private fireService: FirestoreService) { }
 
   ngOnInit(): void {
@@ -36,44 +36,44 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (this.authStateSubscription) this.authStateSubscription.unsubscribe();
   }
 
-  openEditUser(){
+  openEditUser() {
     this.dialog.open(EditUserDialogComponent);
   }
 
-  openAdjustStatus(){
+  openAdjustStatus() {
     this.dialog.open(AdjustStatusComponent);
   }
 
-  // getUser(){
-  //   this.firestore
-  //   .collection('users')
-  //   .doc('Ck2zBp1TeuaNdEDGrCvDwqQxc732')
-  //   .valueChanges()
-  //   .subscribe((user:any) => {
-  //     this.user = new User(user);
-  //     console.log(this.user);
-  //   } )
-  // }
+  getUser() {
+    this.firestore
+      .collection('users')
+      .doc(this.authUserData)
+      .valueChanges()
+      .subscribe((user: any) => {
+        this.user = new User(user);
+        console.log(this.user);
+      })
+  }
 
-  activityStatus(){
-    if(this.user.isActive == true){
+  activityStatus() {
+    if (this.user.isActive == true) {
       console.log('user is active');
       this.activeColor = "green";
     }
   }
 
-  subscribeAuthState(){
+  subscribeAuthState() {
     this.authStateSubscription = this.authService.getAuthState()
-      .subscribe( (authUser) => {
+      .subscribe((authUser) => {
         if (authUser) this.authUserData = authUser;
         if (this.authUserData) this.subscribeCurrentUser()
         else this.userSubscription.unsubscribe();
       });
   }
 
-  subscribeCurrentUser(){
+  subscribeCurrentUser() {
     this.userSubscription = this.fireService.getDocByID(this.authUserData.uid, 'users')
-      .subscribe( (user:any)=>{
+      .subscribe((user: any) => {
         this.user = new User(user);
         console.log('current user: ', this.user);
 

@@ -37,6 +37,7 @@ import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ResetPasswordComponent } from './auth-components/reset-password/reset-password.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ResetPasswordComponent } from './auth-components/reset-password/reset-p
     MatDialogModule,
     PickerModule,
     FormsModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
