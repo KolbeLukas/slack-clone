@@ -24,6 +24,10 @@ export class ChannelsMenuComponent implements OnInit {
     }
   }
 
+  addNewChannel() {
+    console.log('test')
+  }
+
   toggleDMList() {
     if (this.toggleDM) {
       this.toggleDM = false;
@@ -31,4 +35,6 @@ export class ChannelsMenuComponent implements OnInit {
       this.toggleDM = true;
     }
   }
+
+
 }
