@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FirestoreService } from '../services/firestore.service';
+import { DialogNewChannelComponent } from './dialog-new-channel/dialog-new-channel.component';
 
 @Component({
   selector: 'app-channels-menu',
@@ -10,10 +13,19 @@ export class ChannelsMenuComponent implements OnInit {
   toggleDM = true;
   addChannels = false;
   addDM = false;
+  channels$: any;
 
-  constructor() { }
+  constructor(public dialog: MatDialog,
+    public firestore: FirestoreService) { }
 
   ngOnInit(): void {
+    this.getChannels();
+  }
+
+  getChannels() {
+    this.channels$ = this.firestore.getCollection('channels', 'channelName');
+    this.channels$.subscribe();
+
   }
 
   toggleChannelList() {
@@ -26,6 +38,9 @@ export class ChannelsMenuComponent implements OnInit {
 
   addNewChannel() {
     console.log('test')
+    this.dialog.open(DialogNewChannelComponent, {
+      width: '50%'
+    });
   }
 
   toggleDMList() {
@@ -35,6 +50,4 @@ export class ChannelsMenuComponent implements OnInit {
       this.toggleDM = true;
     }
   }
-
-
 }

@@ -32,10 +32,10 @@
         <mat-icon class="add" *ngIf="addChannels">add</mat-icon>
     </div>
     <div *ngIf="toggleChannels">
-        <a>
-            <mat-icon>tag</mat-icon> Channel 1
+        <a *ngFor="let channel of channels$ | async">
+            <mat-icon>tag</mat-icon> {{channel.channelName}}
         </a>
-        <a>
+        <!-- <a>
             <mat-icon>tag</mat-icon> Channel 2
         </a>
         <a>
@@ -43,10 +43,14 @@
         </a>
         <a>
             <mat-icon>tag</mat-icon> Channel 3
-        </a>
-        <a (click)="addNewChannel()">
+        </a> -->
+        <a [matMenuTriggerFor]="addChannel">
             <mat-icon class="add">add</mat-icon> Channels hinzufügen
         </a>
+        <mat-menu #addChannel xPosition="before">
+            <button mat-menu-item (click)="addNewChannel()">Neuen Channel erstellen</button>
+            <button mat-menu-item>Channels durchsuchen</button>
+        </mat-menu>
     </div>
 </div>
 

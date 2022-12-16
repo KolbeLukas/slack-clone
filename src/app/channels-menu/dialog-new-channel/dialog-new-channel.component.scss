@@ -1,0 +1,22 @@
+.new-channel-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 16px;
+}
+
+.submit-btn {
+    background-color: #35373B;
+}
+
+.channel-name {
+    text-transform: capitalize;
+
+    &::placeholder {
+        text-transform: none;
+    }
+}

@@ -1,0 +1,19 @@
+<div>
+    <h1>Channel erstellen</h1>
+    <p>Channels dienen deinem Team zur Kommunikation. Am besten sollten sie
+        themenbezogen sein – #marketing zum Beispiel.</p>
+    <form class="new-channel-form" [formGroup]="newChannelForm" (submit)="createChannel()" novalidate>
+        <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Name</mat-label>
+            <input class="channel-name" matInput formControlName="channelName" placeholder="z. B. Team-Calls">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Beschreibung (optional)</mat-label>
+            <input matInput formControlName="description" placeholder="Placeholder">
+            <mat-hint>Worum geht es in diesem Channel?</mat-hint>
+        </mat-form-field>
+        <div class="btn-container">
+            <button class="submit-btn" mat-raised-button type="submit">Erstellen</button>
+        </div>
+    </form>
+</div>

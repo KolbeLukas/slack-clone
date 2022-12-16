@@ -52,6 +52,7 @@ import { InputComponent } from './shared/input/input.component';
 import { ThreadContainerComponent } from './chat-components/thread/t/thread.component';
 import { DialogImgComponent } from './shared/dialog-img/dialog-img.component';
 import { EditUserContactDialogComponent } from './user-components/edit-user-contact-dialog/edit-user-contact-dialog.component';
+import { DialogNewChannelComponent } from './channels-menu/dialog-new-channel/dialog-new-channel.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { EditUserContactDialogComponent } from './user-components/edit-user-cont
     DialogImgComponent,
     InputComponent,
     EditUserContactDialogComponent,
+    DialogNewChannelComponent,
 
   ],
   imports: [
